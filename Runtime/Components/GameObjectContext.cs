@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace DJM.DependencyInjection.ComponentContext
+namespace DJM.DependencyInjection
 {
     public sealed class GameObjectContext : MonoBehaviour
     {

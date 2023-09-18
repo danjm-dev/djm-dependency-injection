@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using DJM.DependencyInjection.Binding;
-using DJM.DependencyInjection.ComponentContext;
 using UnityEngine;
 
 namespace DJM.DependencyInjection
