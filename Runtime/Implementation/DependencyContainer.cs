@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using DJM.DependencyInjection.Binding;
 using UnityEngine;
 
@@ -45,7 +46,7 @@ namespace DJM.DependencyInjection
         public void Install(params IInstaller[] installers)
         {
             foreach (var installer in installers) installer.InstallBindings(this);
-            ValidateBindings();
+            //ValidateBindings();
             
             
             foreach (var type in _bindings.Keys)
@@ -115,7 +116,27 @@ namespace DJM.DependencyInjection
         
         private object CreateNewComponentOnNewGameObjectInstance(BindingData bindingData)
         {
-            return _gameObjectContext.AddComponentToNewChildGameObject(bindingData.ConcreteType);
+            var instance = _gameObjectContext.AddComponentToNewChildGameObject(bindingData.ConcreteType);
+            
+            
+            
+            foreach (var method in bindingData.ConcreteType.GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic))
+            {
+                if (!Attribute.IsDefined(method, typeof(InjectAttribute))) continue;
+                
+                var parameters = method.GetParameters();
+                var args = new object[parameters.Length];
+            
+                for (var i = 0; i < parameters.Length; i++)
+                {
+                    var paramType = parameters[i].ParameterType;
+                    args[i] = Resolve(paramType);
+                }
+            
+                method.Invoke(instance, args);
+            }
+
+            return instance;
         }
         
         private void ValidateBindings()
