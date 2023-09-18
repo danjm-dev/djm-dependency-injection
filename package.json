@@ -1,0 +1,13 @@
+{
+  "name": "com.djm.dependency-injection",
+  "version": "1.0.0",
+  "displayName": "DJM Dependency Injection",
+  "description": "Dependency injection for Unity.",
+  "dependencies": {
+  },
+  "author": {
+    "name": "danjm.dev",
+    "email": "danjm.dev@gmail.com",
+    "url": "https://github.com/danjm-dev"
+  }
+}
