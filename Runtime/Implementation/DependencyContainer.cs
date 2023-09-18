@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace DJM.DependencyInjection
 {
-    internal sealed class DependencyContainer : IResolvableContainer, IBindableContainer
+    public sealed class DependencyContainer : IResolvableContainer, IBindableContainer
     {
         private readonly Dictionary<Type, BindingData> _bindings;
         private readonly HashSet<Type> _nonLazyBindings;
@@ -17,7 +17,7 @@ namespace DJM.DependencyInjection
         
         private readonly GameObjectContext _gameObjectContext;
 
-        internal DependencyContainer(GameObjectContext gameObjectContext)
+        public DependencyContainer(GameObjectContext gameObjectContext)
         {
             _bindings = new Dictionary<Type, BindingData>();
             _nonLazyBindings = new HashSet<Type>();

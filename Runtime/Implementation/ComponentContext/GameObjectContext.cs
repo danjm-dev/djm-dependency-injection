@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace DJM.DependencyInjection.ComponentContext
 {
-    internal sealed class GameObjectContext : MonoBehaviour
+    public sealed class GameObjectContext : MonoBehaviour
     {
         internal Action OnContextAwake;
         internal Action OnContextStart;
