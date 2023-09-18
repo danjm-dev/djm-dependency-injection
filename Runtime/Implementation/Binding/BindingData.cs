@@ -12,7 +12,7 @@ namespace DJM.DependencyInjection.Binding
         public ConstructorInfo Constructor { get; private set; }
         
         private readonly Type _bindingType;
-        private readonly bool _isComponent;
+        private bool _isComponent;
 
         public Type ConcreteType { get; private set; }
         public InitializationOption InitializationOption { get; private set; }
@@ -50,6 +50,14 @@ namespace DJM.DependencyInjection.Binding
             }
             
             ConcreteType = type;
+            
+            if (typeof(Component).IsAssignableFrom(ConcreteType))
+            {
+                _isComponent = true;
+                InitializationOption = InitializationOption.NewComponentOnNewGameObject;
+            }
+            else InitializationOption = InitializationOption.New;
+            
             if(_isComponent) return;
             Constructor = ResolveConstructor(ConcreteType);
             if (InitializableType.IsAssignableFrom(type)) IsInitializable = true;
