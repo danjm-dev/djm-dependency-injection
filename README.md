@@ -9,10 +9,10 @@
     <img src="https://i.imgur.com/dmkwuPo.png" alt="Logo" width="80" height="80">
   </a>
 
-<h3 align="center">DJM Dependency Injection Package</h3>
+<h3 align="center">DJM Dependency Injection</h3>
 
   <p align="center">
-    Experimental dependency injection implementation for Unity.
+    Experimental dependency injection package for Unity.
     <br />
     <a href="https://github.com/danjm-dev/djm-dependency-injection"><strong>Explore the docs »</strong></a>
     <br />
