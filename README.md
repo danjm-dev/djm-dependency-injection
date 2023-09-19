@@ -50,7 +50,10 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-DJM Dependency Injection is a Unity package for centralised event management in Unity. 
+DJM Dependency Injection is a simple dependency injection system for Unity. 
+Its design, and fluent binding interface is based on [Zenject](https://github.com/modesttree/Zenject).
+
+This implementation is experimental, and not recommended for use in production.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
