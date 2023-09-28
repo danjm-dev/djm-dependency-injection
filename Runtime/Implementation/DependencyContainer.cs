@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Reflection;
 using DJM.DependencyInjection.Binding;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace DJM.DependencyInjection
 {
-    public sealed class DependencyContainer : IResolvableContainer, IBindableContainer
+    public sealed class DependencyContainer : IResolvableContainer, IBindableContainer, IDisposable
     {
         private readonly Dictionary<Type, BindingData> _bindings;
         private readonly HashSet<Type> _nonLazyBindings;
@@ -58,6 +59,18 @@ namespace DJM.DependencyInjection
                     Resolve(type);
                 }
             }
+        }
+        
+        public void Dispose()
+        {
+            _gameObjectContext.OnContextStart -= RunInitializables;
+            _gameObjectContext.OnContextDestroy -= RunDisposables;
+            
+            _bindings.Clear();
+            _nonLazyBindings.Clear();
+            _singleInstances.Clear();
+            _initializables.Clear();
+            _disposables.Clear();
         }
 
         public TBinding Resolve<TBinding>()
@@ -161,8 +174,9 @@ namespace DJM.DependencyInjection
 
             RunInitializables();
             RunDisposables();
+            
+            foreach (var instance in components) Object.Destroy(instance.gameObject);
             _singleInstances.Clear();
-            foreach (var instance in components) UnityEngine.Object.Destroy(instance.gameObject);
 #endif
         }
 
@@ -177,5 +191,7 @@ namespace DJM.DependencyInjection
             foreach (var disposable in _disposables) disposable.Dispose();
             _disposables.Clear();
         }
+
+
     }
 }

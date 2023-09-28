@@ -1,6 +1,6 @@
 {
   "name": "com.djm.dependency-injection",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "displayName": "DJM Dependency Injection",
   "description": "Dependency injection for Unity.",
   "dependencies": {
